@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthImage from "../../assets/images/backgrounds/Step3.png";
 import {useSelectPriceMutation} from '../redux/user/userApiSlice'
+import { useNavigate, Link} from 'react-router-dom'
 
 import Logo from "../../assets/images/logo/logo.png";
 
@@ -8,7 +9,10 @@ const Step3 = () => {
   
   const [selectedOption, setSelectedOption] = useState("monthly");
   const [selectedPlan, setSelectedPlan] = useState("starter");
-  console.log({"pricingTier": selectedPlan})
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
   const plans = {
     monthly: {
       starterPrice: "$349",
@@ -23,27 +27,29 @@ const Step3 = () => {
       proTransactions: "1740 Transactions /Yearly",
     },
   };
+  
+  const navigate = useNavigate()
 
   const currentPlan = plans[selectedOption];
+
   const [selectedPrice] = useSelectPriceMutation()
 
-  const handlePlanChange = (plan) => {
+  const handlePlanChange = async (plan) => {
     setSelectedPlan(plan);
+    try {
+      const res = await selectedPrice({"pricingTier": selectedPlan }).unwrap
+      if(res.data){
+        navigate('/')
+      }
+    } catch (err) {
+      setError(err.data.message)
+    }
   };
 
   const handleFrequencyChange = (frequency) => {
     setSelectedOption(frequency);
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await selectedPric({"pricingTier": selectedPlan }).unwrap
-      dispatch(setCred({...res}))
-      navigate('/')
-    } catch (err) {
-      setError(err.data.message)
-    }
-  };
+ 
 
   return (
     <div className="grid lg:grid-cols-6 lg:px-16 lg:py-6 p-0 lg:gap-12 gap-0 lg:h-full h-[100vh] ">
@@ -199,8 +205,7 @@ const Step3 = () => {
                     ></span>
                     Annually
                   </label>
-             
-                <input
+                  <input
                   type="radio"
                   id="annually"
                   name="frequency"
@@ -231,28 +236,6 @@ const Step3 = () => {
                   onChange={(e) => handleFrequencyChange(e.target.value)}
                   className="hidden"
                 />
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <label
-                    htmlFor="monthly"
-                    className="flex flex-row items-center gap-2 text-red-500 cursor-pointer"
-                  >
-                    <span
-                      className={`w-4 h-4 rounded-full border-2 border-red-500 ${
-                        selectedOption === "monthly" ? "bg-red-500" : ""
-                      }`}
-                    ></span>
-                    Monthly
-                  </label>
-                  <input
-                    type="radio"
-                    id="monthly"
-                    name="frequency"
-                    value="monthly"
-                    checked={selectedOption === "monthly"}
-                    onChange={(e) => handleFrequencyChange(e.target.value)}
-                    className="hidden"
-                  />
                 </div>
               </div>
             </div>

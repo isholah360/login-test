@@ -117,38 +117,7 @@ const Step1 = () => {
                 className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500 outline-none border focus:border-gray-600 shadow-sm rounded-lg"
               />
             </div>
-            <div>
-              <label className="font-medium flex flex-row items-center justify-between gap-2">
-                <p className="flex flex-row items-center gap-2">
-                  {" "}
-                 User Type <CiCircleQuestion />{" "}
-                </p>{" "}
-              </label>
-              <input
-                type="text"
-                placeholder="Team Member"
-                name="userType"
-                onChange={handleChange}
-                required
-                className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500 outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="font-medium flex flex-row items-center justify-between gap-2">
-                <p className="flex flex-row items-center gap-2">
-                  {" "}
-                Role <CiCircleQuestion />{" "}
-                </p>{" "}
-              </label>
-              <input
-                type="email"
-                placeholder="Primary"
-                onChange={handleChange}
-                name="role"
-                required
-                className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500 outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-              />
-            </div>
+            
             <button className="w-full px-4 py-2 text-white font-medium bg-[#b0b5c9] hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
               Get Started
             </button>

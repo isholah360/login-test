@@ -33,14 +33,14 @@ function App() {
 
         <Route path="/business-info" element={<Step2 />} />
 
-        {/* <Route path="/select-price" element={<Step3 />} /> */}
+        <Route path="/select-price" element={<Step3 />} />
 
         <Route path="/payment-method" element={<Step4 />} />
 
         <Route path="/agree-terms" element={<Step5 />} />
 
         <Route path="/account-progress" element={<Step6 />} />
-        
+
         {/* <Route path="/" element={<Dashboard />} /> */}
       </Routes>
     </Router>
