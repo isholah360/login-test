@@ -123,7 +123,7 @@ const Step1 = () => {
             </button>
             {error && <p className="text-[#D61B1B]">Incorrect Password</p>}
             <div className="text-start py-8">
-              <Link href="javascript:void(0)" className="">
+              <Link to="/login" className="">
                 Already have an Account?
                 <span className="text-[#9cabd7] hover:text-indigo-600"> {""}Sign in</span>
               </Link>

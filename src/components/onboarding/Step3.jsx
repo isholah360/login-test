@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthImage from "../../assets/images/backgrounds/Step3.png";
 import {useSelectPriceMutation} from '../redux/user/userApiSlice'
 import { useNavigate, Link} from 'react-router-dom'
@@ -9,6 +9,7 @@ const Step3 = () => {
   
   const [selectedOption, setSelectedOption] = useState("monthly");
   const [selectedPlan, setSelectedPlan] = useState("starter");
+  const [formData, setFormData] = useState({})
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -31,7 +32,21 @@ const Step3 = () => {
   const navigate = useNavigate()
 
   const currentPlan = plans[selectedOption];
+  
+   useEffect(()=>{
 
+    if(selectedPlan === "starter" && selectedOption === "monthly"){
+      setFormData({pricingTier: "$349", starterTransactions: "35 Transactions /Monthly", })
+    } else if (selectedPlan === "pro" && selectedOption === "monthly"){
+      setFormData({pricingTier: "$849", starterTransactions: "145 Transactions /Monthly",})
+    } else if (selectedPlan === "starter" && selectedOption === "annually"){
+      setFormData({pricingTier: "$3,999", starterTransactions: "420 Transactions /yearly",})
+    }  else if (selectedPlan === "pro" && selectedOption === "annually"){
+      setFormData({pricingTier: "$9,999", starterTransactions: "420 Transactions /yearly",})
+    } 
+
+   }, [selectedOption, selectedPlan])
+   console.log(formData)
   const [selectedPrice] = useSelectPriceMutation()
 
   const handlePlanChange = async (plan) => {
@@ -56,134 +71,7 @@ const Step3 = () => {
       <div className="col-span-4 bg-[#f4f4f4] px-12  pt-8 rounded-[50px] border border-[#cbceda] h-full">
         <img src={Logo} alt="Logo" className="pt-12" />
         <div className="text-start">
-          {/* <div className="mt-5 space-y-2">
-            <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-              Pricing Model
-            </h3>
-            <div className="flex flex-row items-center justify-between ">
-              <p className="">
-                Select your plan. All plans have a 7 day free trial!
-              </p>
-              <div className="flex flex-row gap-4">
-                <div className="flex flex-row items-center gap-2">
-                  <label
-                    htmlFor="annually"
-                    className="flex flex-row items-center gap-2 text-red-500 cursor-pointer"
-                  >
-                    <span
-                      className={`w-4 h-4 rounded-full border-2 border-red-500  ${
-                        selectedOption === "annually" ? "bg-red-500 " : ""
-                      }`}
-                    ></span>
-                    Annually
-                  </label>
-                  <input
-                    type="radio"
-                    id="annually"
-                    name="frequency"
-                    value="annually"
-                    checked={selectedOption === "annually"}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                    className="hidden"
-                  />
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <label
-                    htmlFor="monthly"
-                    className="flex flex-row items-center gap-2 text-red-500 cursor-pointer"
-                  >
-                    <span
-                      className={`w-4 h-4 rounded-full border-2 border-red-500 ${
-                        selectedOption === "monthly" ? "bg-red-500" : ""
-                      }`}
-                    ></span>
-                    Monthly
-                  </label>
-                  <input
-                    type="radio"
-                    id="monthly"
-                    name="frequency"
-                    value="monthly"
-                    checked={selectedOption === "monthly"}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                    className="hidden"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap">
-              <div className="h-[168px] w-[300px]"></div>
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-3xl font-extrabold pt-12">Starter</h1>
-                <p className="text-[#B0B5C9]">
-                  from <span className="text-[#9CA8D7]"> $349</span> /Monthly
-                </p>
-                <p className="text-[#B0B5C9]">7 day free trial!</p>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-3xl font-extrabold pt-12">Pro</h1>
-                <p className="text-[#B0B5C9]">
-                  from <span className="text-[#9CA8D7]"> $849</span> /Monthly
-                </p>
-                <p className="text-[#B0B5C9]">7 day free trial!</p>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-1xl font-extrabold pt-12">
-                  Teammate/Subscribers
-                </h1>
-                <p className="text-[#B0B5C9] text-xs">
-                  A teammate has their own login credentials. A subscriber is
-                  someone who can receive transaction notifications.
-                </p>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-1xl font-extrabold pt-12">
-                  Includes 2 Teammates
-                </h1>
-                <h1 className="text-1xl font-extrabold">
-                  Includes 50 Subscribers
-                </h1>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-1xl font-extrabold pt-12">
-                  Includes 14 Teammates
-                </h1>
-                <h1 className="text-1xl font-extrabold whitespace-nowrap">
-                  Includes 250 Subscribers
-                </h1>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-1xl font-extrabold pt-12">Transactions</h1>
-                <p className="text-[#B0B5C9] text-xs">
-                  Each transaction is a fully processed bundle of documents. A
-                  bundle can include up to 5 documents. Each document in the
-                  bundle can contain up to 50,000 words.
-                </p>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-1xl font-extrabold pt-12">
-                  35 Transactions /Monthly
-                </h1>
-              </div>{" "}
-              <div className="h-[168px] w-[300px] border-[#CBCEDA] border bg-[#ffffff] px-10">
-                <h1 className="text-1xl font-extrabold pt-12">
-                  145 Transactions /Monthly
-                </h1>
-              </div>{" "}
-              <div className="h-[168px] w-[300px]"></div>{" "}
-              <div className="h-[168px] w-[300px] pt-12 px-10">
-                <button className=" px-4 py-2 text-white font-medium bg-[#b0b5c9] hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
-                  Choose the Starter plan
-                </button>{" "}
-              </div>{" "}
-              <div className="h-[168px] w-[300px] pt-12 px-12">
-                <button className=" px-6 py-2 text-white font-medium bg-[#b0b5c9] hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
-                  Choose the Pro plan
-                </button>{" "}
-              </div>
-            </div>
-          </div> */}
+         
           <div className="mt-5 space-y-2">
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
               Pricing Model

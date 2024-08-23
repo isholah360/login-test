@@ -107,9 +107,9 @@ const Login = () => {
               </Link>
             </div>
             <div className="text-start">
-              <Link href="/personal-info" className="hover:text-indigo-600">
+              <Link to="/personal-info" className="">
                 Need an Account?
-                <span className="text-[#9cabd7]"> {""}Sign up</span>
+                <span className="text-[#9cabd7] hover:text-indigo-600"> {""}Sign up</span>
               </Link>
             </div>
 
