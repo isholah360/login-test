@@ -36,16 +36,16 @@ const Step3 = () => {
    useEffect(()=>{
 
     if(selectedPlan === "starter" && selectedOption === "monthly"){
-      setFormData({pricingTier: "$349", starterTransactions: "35 Transactions /Monthly", })
+      setFormData({pricingTier: "$349", starterTransactions: "35", })
     } else if (selectedPlan === "pro" && selectedOption === "monthly"){
-      setFormData({pricingTier: "$849", starterTransactions: "145 Transactions /Monthly",})
+      setFormData({pricingTier: "$849", starterTransactions: "145",})
     } else if (selectedPlan === "starter" && selectedOption === "annually"){
-      setFormData({pricingTier: "$3,999", starterTransactions: "420 Transactions /yearly",})
+      setFormData({pricingTier: "$3,999", starterTransactions: "420",})
     }  else if (selectedPlan === "pro" && selectedOption === "annually"){
-      setFormData({pricingTier: "$9,999", starterTransactions: "420 Transactions /yearly",})
+      setFormData({pricingTier: "$9,999", starterTransactions: "1740",})
     } 
 
-   }, [selectedOption, selectedPlan])
+   }, [selectedOption, selectedPlan, currentPlan])
    console.log(formData)
   const [selectedPrice] = useSelectPriceMutation()
 
