@@ -24,7 +24,8 @@ const Step4 = () => {
     e.preventDefault();
     try {
       const res = await payMethood({
-        paymentMethod: formData.paymentMethod,
+        paymentMethod: formData.customerEmail,
+        tenant: 1,
         paymentDetail: {
           cardNumber: formData.cardNumber,
           expiryDate: formData.expiryDate,
@@ -67,8 +68,8 @@ const Step4 = () => {
               <input
                 type="text"
                 onChange={handleChange}
-                name="paymentMethod"
-                placeholder="John Doe"
+                name="csutomerEmail"
+                placeholder="customer@example.com"
                 required
                 className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500  outline-none border focus:border-gray-600 shadow-sm rounded-lg"
               />
@@ -100,7 +101,7 @@ const Step4 = () => {
               <input
                 type="text"
                 onChange={handleChange}
-                placeholder="123 Main Street, Sunnyville, MO 12345"
+                placeholder="12/12/2030"
                 name="expiryDate"
                 required
                 className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500  outline-none border focus:border-gray-600 shadow-sm rounded-lg"

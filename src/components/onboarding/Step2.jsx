@@ -9,12 +9,10 @@ import { usePayMethodMutation } from "../redux/user/userApiSlice";
 import { useNavigate, Link } from "react-router-dom";
 
 const Step2 = () => {
-
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  
   const navigate = useNavigate();
 
   const [payMethood] = usePayMethodMutation();
@@ -32,11 +30,11 @@ const Step2 = () => {
           cardNumber: formData.cardNumber,
           expiryDate: formData.expiryDate,
           ccv: formData.ccv,
-          billingAddress:formData.billingAddress
+          billingAddress: formData.billingAddress,
         },
       }).unwrap;
-      if(res.data){
-        navigate("/")
+      if (res.data) {
+        navigate("/");
       }
     } catch (err) {
       setError(err.data.message);
@@ -58,15 +56,12 @@ const Step2 = () => {
               </p>
             </div>
           </div>
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 space-y-5 "
-          >
+          <form onSubmit={handleSubmit} className="mt-8 space-y-5 ">
             <div>
               <label className="font-medium flex flex-row items-center justify-between gap-2">
                 <p className="flex flex-row items-center gap-2">
                   {" "}
-                  Legal Company Name <CiCircleQuestion />{" "}
+                  Doe Enterprises <CiCircleQuestion />{" "}
                 </p>{" "}
               </label>
               <input
@@ -82,19 +77,34 @@ const Step2 = () => {
               <label className="font-medium flex flex-row items-center justify-between gap-2">
                 <p className="flex flex-row items-center gap-2">
                   {" "}
-                  Website <CiCircleQuestion />{" "}
+                  Industry <CiCircleQuestion />{" "}
                 </p>{" "}
               </label>
               <input
                 type="text"
                 name="industry"
                 onChange={handleChange}
-                placeholder="acmeco.com"
+                placeholder="Technology"
                 required
                 className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500  outline-none border focus:border-gray-600 shadow-sm rounded-lg"
               />
             </div>
-
+            <div>
+              <label className="font-medium flex flex-row items-center justify-between gap-2">
+                <p className="flex flex-row items-center gap-2">
+                  {" "}
+                  Website <CiCircleQuestion />{" "}
+                </p>{" "}
+              </label>
+              <input
+                type="text"
+                onChange={handleChange}
+                placeholder="Website"
+                name="website"
+                required
+                className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500  outline-none border focus:border-gray-600 shadow-sm rounded-lg"
+              />
+            </div>
             <div>
               <label className="font-medium flex flex-row items-center justify-between gap-2">
                 <p className="flex flex-row items-center gap-2">
@@ -115,14 +125,14 @@ const Step2 = () => {
               <label className="font-medium flex flex-row items-center justify-between gap-2">
                 <p className="flex flex-row items-center gap-2">
                   {" "}
-                  Database/ERP <CiCircleQuestion />{" "}
+                  VerticalEmail <CiCircleQuestion />{" "}
                 </p>{" "}
               </label>
               <input
                 type="text"
-                name="emailProvider"
+                name=" verticalEmail"
                 onChange={handleChange}
-                placeholder="SQL/NAV (Custom)"
+                placeholder="contact@doe-enterprises.com"
                 required
                 className="w-full mt-2 px-3 py-2 bg-[#ffffff] text-gray-500  outline-none border focus:border-gray-600 shadow-sm rounded-lg"
               />

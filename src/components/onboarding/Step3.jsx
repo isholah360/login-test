@@ -36,25 +36,25 @@ const Step3 = () => {
    useEffect(()=>{
 
     if(selectedPlan === "starter" && selectedOption === "monthly"){
-      setFormData({pricingTier: "$349", starterTransactions: "35", })
+      setFormData({pricingTier: "Starter", billingCycle: "MONTHLY", })
     } else if (selectedPlan === "pro" && selectedOption === "monthly"){
-      setFormData({pricingTier: "$849", starterTransactions: "145",})
+      setFormData({pricingTier: "Professional", billingCycle: "MONTHLY",})
     } else if (selectedPlan === "starter" && selectedOption === "annually"){
-      setFormData({pricingTier: "$3,999", starterTransactions: "420",})
+      setFormData({pricingTier: "Starter", billingCycle: "ANNUALLY",})
     }  else if (selectedPlan === "pro" && selectedOption === "annually"){
-      setFormData({pricingTier: "$9,999", starterTransactions: "1740",})
+      setFormData({pricingTier: "Professional9", billingCycles: "ANNUALLY",})
     } 
 
-   }, [selectedOption, selectedPlan, currentPlan])
+   }, [selectedOption, selectedPlan])
    console.log(formData)
   const [selectedPrice] = useSelectPriceMutation()
 
   const handlePlanChange = async (plan) => {
     setSelectedPlan(plan);
     try {
-      const res = await selectedPrice({"pricingTier": selectedPlan }).unwrap
+      const res = await selectedPrice(FormData).unwrap
       if(res.data){
-        navigate('/')
+        navigate('/plans')
       }
     } catch (err) {
       setError(err.data.message)

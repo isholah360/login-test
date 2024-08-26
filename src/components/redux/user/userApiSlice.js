@@ -68,18 +68,23 @@ const userApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    getAllUser: builder.mutation({
+    getAllUser: builder.query({
       query: ({ data }) => ({
         url: `${USERS_URL}`,
         method: "Get",
         body: data,
       }),
     }),
-    getUser: builder.mutation({
+    getUser: builder.query({
       query: ({ id, data }) => ({
         url: `${USERS_URL}/${id}`,
         method: "Get",
-        body: data,
+      }),
+    }),
+    getPlan: builder.query({
+      query: () => ({
+        url: `${ONBOARD_URL}/plans`,
+        method: "Get",
       }),
     }),
   }),
@@ -96,5 +101,6 @@ export const {
   usePayMethodMutation,
   useSelectPriceMutation,
   useGetUserQuery,
-  useGetAllUserQuery
+  useGetAllUserQuery, 
+  useGetPlanQuery,
 } = userApiSlice;

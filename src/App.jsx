@@ -15,6 +15,7 @@ import Step4 from "./components/onboarding/Step4";
 
 import Step5 from "./components/onboarding/Step5";
 import Step6 from "./components/onboarding/Step6";
+import Step7 from "./components/onboarding/Step7";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/agree-terms" element={<Step5 />} />
 
         <Route path="/account-progress" element={<Step6 />} />
+        <Route path="/plans" element={<Step7 />} />
 
         {/* <Route path="/" element={<Dashboard />} /> */}
       </Routes>
